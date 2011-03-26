@@ -13,7 +13,7 @@ d1 * d10 * d100 * d1000 * d10000 * d100000 * d1000000
 main = print f
 
 f :: Int
-f = product $ map d $ map (10^) [0..6]
+f = product $ map (d.(10^)) [0..6]
 
 d :: Int -> Int
 d = read.return.(str !! ).(flip (-) 1)
