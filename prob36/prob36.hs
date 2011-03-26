@@ -1,3 +1,8 @@
+{-
+The decimal number, 585 = 1001001001 (binary), is palindromic in both bases.
+
+Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.
+-}
 
 main = print f
 
@@ -11,6 +16,6 @@ isPalindrome n
     str = show n
  
 dec2Bin :: Int -> String
-dec2Bin 0 = "0"
-dec2Bin 1 = "1"
-dec2Bin n = (dec2Bin (n `div` 2)) ++ (show $ n `mod` 2)
+dec2Bin n 
+  | n < 2 = show n
+  | otherwise = (dec2Bin (n `div` 2)) ++ (show $ n `mod` 2)
