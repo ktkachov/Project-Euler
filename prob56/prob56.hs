@@ -11,4 +11,4 @@ main = print f
 f = maximum [sum $ digits (a^b) | a <- [1..100], b <- [1..100]]
 
 digits :: Integer -> [Int]
-digits n = map read (map return (show n))
+digits n = map (read.return) (show n)

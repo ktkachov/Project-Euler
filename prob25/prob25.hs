@@ -19,4 +19,4 @@ fib2 n
        c     = a + b
 
 digits :: Integer -> [Int]
-digits n = map read $ map return (show n)
+digits n = map (read.return) (show n)
