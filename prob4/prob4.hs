@@ -6,6 +6,7 @@ Find the largest palindrome made from the product of two 3-digit numbers
 
 -}
 
+main = print f
 
 isPalindrome :: Int -> Bool
 isPalindrome x 
