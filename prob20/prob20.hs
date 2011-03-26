@@ -18,4 +18,4 @@ fact :: Int -> Integer
 fact n = facs !! n
 
 digits :: Integer -> [Int]
-digits n = map read $ map return (show n)
+digits n = map (read.return) (show n)
