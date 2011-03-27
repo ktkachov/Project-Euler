@@ -28,8 +28,8 @@ isPalindrome x
 
 isLychrel :: Integer -> Bool
 isLychrel n 
-  = (<) 50 $ length $ takeWhile (\(x,i) -> i < 52 && (not $ isPalindrome x))
-    (iterate (\(x,i) -> (x + revInt x, succ i))(n + revInt n,1))
+  = (==) 51 $ length $ take 51 $ takeWhile (\x -> not $ isPalindrome x)
+    (iterate (\x -> x + revInt x)(n + revInt n))
 
 revInt :: Integer -> Integer
 revInt = read.reverse.show
