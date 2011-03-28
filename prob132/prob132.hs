@@ -7,18 +7,37 @@ Find the sum of the first forty prime factors of R(10^9)
 -}
 
 
---Currently runs out of memory :(
+--primes taken from literateprograms.org
 
-main = print f
+main = print $ f (10^9)
 
-f = take 40 $ primeFactors $ r (10^9)
+f n = sum $ take 40 $ primeFactors $ repUnit n
+
+repUnit :: Int -> Integer
+repUnit n = read $ take n $ repeat '1'
 
 primeFactors :: Integer -> [Integer]
-primeFactors n = factor n primes
-  where factor n (p:ps) | p*p > n = [n]
-                        | n `mod` p /= 0 = factor n ps
-                        | otherwise = p : factor (n `div` p) (p:ps)
-        primes = 2 : filter ((==1) . length . primeFactors) [3,5..]
+primeFactors n = [x | x <- takeWhile (< (floor.sqrt.fromIntegral $ n)) primes, n `mod` x == 0]
 
-r :: Int -> Integer
-r n = read $ replicate n '1'
+merge :: (Ord a) => [a] -> [a] -> [a]
+merge xs@(x:xt) ys@(y:yt) = 
+  case compare x y of
+    LT -> x : (merge xt ys)
+    EQ -> x : (merge xt yt)
+    GT -> y : (merge xs yt)
+
+diff :: (Ord a) => [a] -> [a] -> [a]
+diff xs@(x:xt) ys@(y:yt) = 
+  case compare x y of
+    LT -> x : (diff xt ys)
+    EQ -> diff xt yt
+    GT -> diff xs yt
+
+primes :: [Integer]
+primes    = [2, 3, 5] ++ (diff [7, 9 ..] nonprimes) 
+
+nonprimes :: [Integer]
+nonprimes = foldr1 f . map g . tail $ primes
+  where 
+    f (x:xt) ys = x : (merge xt ys)
+    g p         = [ n * p | n <- [p, p + 2 ..]]
