@@ -25,4 +25,4 @@ f n = ((findIndices ((show n) `isPrefixOf`) (tails $ s)) !! (n-1)) + 1
 -- +1 because lists are indexed from 0
 
 s :: String
-s = concat $ map show [1..]
+s = [1..] >>= show
