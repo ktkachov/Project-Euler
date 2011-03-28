@@ -19,14 +19,23 @@ We can see that 28 is the first triangle number to have over five divisors.
 What is the value of the first triangle number to have over five hundred divisors?
 -}
 
+--Too slow! Because of factorisation
+
 
 main = print f
 
-triangleNum :: Int -> Int
-triangleNum n = foldl (+) 1 [2..n]
+f :: Integer
+f = fst $ head $ filter (\(x,y) -> y > 500) [(x, factorsL x)| x <- triangleNums]
 
-factors :: Int -> [Int]
-factors n = [x | x <- [1..n `div` 2], n `mod` x == 0] ++ [n]
+triangleNums :: [Integer]
+triangleNums = triangleNums' 1 0
 
-f :: Int
-f = fst $ head $ filter (\(x,xs) -> length xs >= 500) [(x, factors x)| x <- map triangleNum [1..]]
+triangleNums' :: Integer -> Integer -> [Integer]
+triangleNums' x s 
+  = s' : (triangleNums' (succ x) s')
+  where
+    s' = x + s
+
+
+factorsL :: (Integral a) => a -> Int
+factorsL n = (+) 1 $ length $ [x | x <- [1..n `div` 2], n `mod` x == 0]
