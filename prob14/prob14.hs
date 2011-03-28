@@ -17,7 +17,7 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 
 main = print f
 
-f =  findMax [(x, (length.iterSequence) x) | x <- [2..1000000]]
+f =  findMax [(x, (succ.length.iterSequence) x) | x <- [2..10^6 - 1]]
 
 findMax :: [(Int, Int)] -> Int
 findMax xs = findMax' xs (0,0)
@@ -28,7 +28,7 @@ findMax' ((x,l):xs) (x',l') = if l > l' then findMax' xs (x,l) else findMax' xs 
 
 
 iterSequence :: Int -> [Int]
-iterSequence n = (takeWhile (/=1) (iterate fun n)) ++ [1]
+iterSequence n = (takeWhile (/=1) (iterate fun n))
 
 fun :: Int -> Int
 fun n
