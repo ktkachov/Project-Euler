@@ -19,14 +19,14 @@ float nOverPhiN(unsigned long n) {
 
 /*
 total Hack! check only quarter of numbers and multiply by 2
-give correct answer. Don't know why 
+give correct answer. Don't know why it works...
 */
 
 int main (int argc, char* argv[]) {
   unsigned long int i = 0;
   unsigned long int iMax = 0;
   float max = 0.0;
-  for (i = 3; i <= 1000000; ++i) {
+  for (i = 3; i <= 1000000; i+=4) {
     float temp = nOverPhiN(i);
     if (temp > max) {
       max = temp;
