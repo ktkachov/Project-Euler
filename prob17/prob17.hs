@@ -1,14 +1,17 @@
 main = print f
 
-f = (sum $ map foo [1..1000]) + (length "onethousand")
+f = (sum $ map foo [1..999]) + (length "onethousand")
 
 foo n
-  = hunds' + (count10s tens)
+  = hunds + countAnd hunds tens + (count10s tens)
   where
-    hunds' = if tens == 0 then hunds else hunds + 3
     hunds = count100s hundreds
     hundreds = n `div` 100
     tens = n `mod` 100
+
+countAnd hunds tens
+  | hunds /=0 && tens /= 0 = 3
+  | otherwise = 0
 
 count100s n = if n == 0 then 0 else (lookUp n numLetts) + 7
 
