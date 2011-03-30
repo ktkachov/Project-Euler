@@ -1,13 +1,19 @@
-{-too slow-}
-
 import Data.List
 
 main = print f
 
-f = last [x | x <- (filter (\x -> x > 100000000) primes), pandigital 9 x]
+f = head [n | n <- [1..], all (==4) (map (length.nub.primeFactors) [n,n+1,n+2,n+3])]
 
-pandigital digs n
-  = ((sort.show)) n == ([1..digs] >>= show)
+
+primeFactors :: Integer -> [Integer]
+primeFactors n = primeFactors' n primes 
+
+
+primeFactors' :: Integer -> [Integer] -> [Integer]
+primeFactors' 1 _ = []
+primeFactors' n (p:ps)
+  | n `mod` p == 0 = p:(primeFactors' (n `div` p) (p:ps))
+  | otherwise = primeFactors' n ps
 
 merge :: (Ord a) => [a] -> [a] -> [a]
 merge xs@(x:xt) ys@(y:yt) = 
@@ -32,5 +38,3 @@ nonprimes = foldr1 f . map g . tail $ primes
   where 
     f (x:xt) ys = x : (merge xt ys)
     g p         = [ n * p | n <- [p, p + 2 ..]]
-
-
