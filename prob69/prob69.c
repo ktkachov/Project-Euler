@@ -13,7 +13,7 @@ unsigned long phi(unsigned long x) {
   return ret;
 }
 
-float nOverPhiN(unsigned long n) {
+inline float nOverPhiN(unsigned long n) {
   return (float) n / (float) phi(n);
 }
 
