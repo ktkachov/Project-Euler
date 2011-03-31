@@ -1,5 +1,3 @@
-{-too slow-}
-
 import Data.List
 
 main = print f
