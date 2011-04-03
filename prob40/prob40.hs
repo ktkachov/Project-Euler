@@ -16,7 +16,7 @@ f :: Int
 f = product $ map (d.(10^)) [0..6]
 
 d :: Int -> Int
-d = read.return.(str !! ).(flip (-) 1)
+d = read.return.(str !! ).pred
 
 str :: String
 str =  [1..] >>= show
